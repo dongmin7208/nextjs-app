@@ -4,7 +4,8 @@ export default function EventList(props) {
   const { items } = props;
   return (
     <ul className={classes.list}>
-      {items.map((event) => (
+      {items?.map((event) => (
+        //======== items && items.map
         <EventItem
           key={event.id}
           id={event.id}
