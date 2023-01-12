@@ -6,9 +6,9 @@ import ArrowRightIcon from '../icons/arrow-right-icon';
 
 export default function EventItem(props) {
   const { title, location, date, image, id } = props;
-  const humanReadableDate = new Date(date).toLocaleDateString('ja-jp', {
-    daya: 'numeric',
-    month: 'long',
+  const humanReadableDate = new Date(date).toLocaleDateString('ja-JP', {
+    day: 'numeric',
+    month: 'short',
     year: 'numeric',
   });
   const formattedAddress = location.replace(', ', '\n');
