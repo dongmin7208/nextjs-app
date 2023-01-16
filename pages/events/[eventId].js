@@ -25,10 +25,7 @@ export default function EventDetailPage(props) {
     <Fragment>
       <Head>
         <title>{event.title}</title>
-        <meta
-          name='description'
-          content='Find a lot of great events that allow you to evolve...'
-        />
+        <meta name='description' content={event.description} />
       </Head>
       <EventSummary title={event.title} />
       <EventLogistics

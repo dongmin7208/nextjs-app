@@ -7,7 +7,7 @@ export default function HomePage(props) {
   return (
     <div>
       <Head>
-        <title>NexjJS Events</title>
+        <title>NextJS Events</title>
         <meta
           name='description'
           content='Find a lot of great events that allow you to evolve...'
