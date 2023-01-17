@@ -1,8 +1,11 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 function EmailForm() {
+  const [feedbackItems, setFeedbackItems] = useState([]);
+
   const emailInputRef = useRef();
   const feedbackInputRef = useRef();
   function submitFormHandler(event) {
+    console.log('submitHandler: ', event);
     event.preventDefault();
 
     const enteredEmail = emailInputRef.current.value;
@@ -14,7 +17,16 @@ function EmailForm() {
       headers: {
         'Content-Type': 'application/json',
       },
-    }); //{email: 'test@test.com', text: 'Some feedback text'}
+    })
+      .then((response) => response.json())
+      .then((data) => console.log('data: ', data)); //{email: 'test@test.com', text: 'Some feedback text'}
+  }
+  function loadFeedbackHandler() {
+    fetch('/api/feedback')
+      .then((response) => response.json())
+      .then((data) => {
+        setFeedbackItems(data.feedback);
+      });
   }
   return (
     <div>
@@ -26,10 +38,17 @@ function EmailForm() {
         </div>
         <div>
           <label htmlFor='feedback'>Your feedback</label>
-          <input rows='5' id='feedback' ref={feedbackInputRef} />
+          <input type='text' id='feedback' rows='5' ref={feedbackInputRef} />
         </div>
         <button>Send Feedback</button>
       </form>
+      <hr />
+      <button onClick={loadFeedbackHandler}>Load Feedback</button>
+      <ul>
+        {feedbackItems.map((item) => (
+          <li key={item.id}>{item.text}</li>
+        ))}
+      </ul>
     </div>
   );
 }
